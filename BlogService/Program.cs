@@ -1,9 +1,11 @@
 using Blog.Domain.Repositories;
+using Blog.Domain.Repositories.Repos;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("TestDb"));
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 
 // Add services to the container.
 
