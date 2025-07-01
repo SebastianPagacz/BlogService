@@ -1,13 +1,15 @@
 using Blog.Domain.Repositories;
 using Blog.Domain.Repositories.Repos;
+using Blog.Domain.Seeders;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("TestDb"));
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 
-// Add services to the container.
+builder.Services.AddScoped<IBlogSeeder, BlogSeeder>();
 
 builder.Services.AddControllers();
 
@@ -28,5 +30,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Seeding test data
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<IBlogSeeder>();
+await seeder.SeedAsync();
 
 app.Run();

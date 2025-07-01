@@ -1,6 +1,5 @@
 ﻿using Blog.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Blog.Domain.Repositories;
 

@@ -4,13 +4,13 @@ namespace Blog.Domain.Models;
 
 public class BlogPostEntity
 {
-    [Required]
+    [Key]
     public int Id { get; set; }
     
     [MaxLength(60)]
     public string Title { get; set; } = string.Empty;
     
-    [MaxLength]
+    [MaxLength(2000)]
     public string Content { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Blog.Domain.Repositories.Repos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogService.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PostsController : ControllerBase
+public class PostsController(IPostRepository repo) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        return StatusCode(200);
+        var result = await repo.GetAllAsync();
+        return StatusCode(200, result);
     }
 }

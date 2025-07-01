@@ -4,7 +4,7 @@ namespace Blog.Domain.Models;
 
 public class CommentEntity
 {
-    [Required]
+    [Key]
     public int Id { get; set; }
     
     [MaxLength(60)]
@@ -18,5 +18,5 @@ public class CommentEntity
 
     // Post
     public int PostId { get; set; }
-    public BlogPostEntity Post { get; set; } = new BlogPostEntity();
+    public BlogPostEntity? Post { get; set; }
 }
