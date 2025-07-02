@@ -1,4 +1,5 @@
-﻿using Blog.Application.Commands.ProductCommands;
+﻿using AutoMapper;
+using Blog.Application.Commands.ProductCommands;
 using Blog.Domain.Dtos;
 using Blog.Domain.Models;
 using Blog.Domain.Repositories.Repos;
@@ -6,7 +7,7 @@ using MediatR;
 
 namespace Blog.Application.Commands.BlogPostCommands;
 
-public class CreateBlogPostHandler(IPostRepository repository) : IRequestHandler<CreateBlogPostCommand, BlogPostDto>
+public class CreateBlogPostHandler(IPostRepository repository, IMapper mapper) : IRequestHandler<CreateBlogPostCommand, BlogPostDto>
 {
     public async Task<BlogPostDto> Handle(CreateBlogPostCommand request, CancellationToken cancellationToken)
     {
@@ -21,13 +22,7 @@ public class CreateBlogPostHandler(IPostRepository repository) : IRequestHandler
 
         await repository.AddAsync(newPost);
 
-        // TODO: add automapper
-        var result = new BlogPostDto
-        {
-            Title = request.Titile,
-            Content = request.Content,
-            CreatedAt = DateTime.UtcNow,
-        };
+        var result = mapper.Map<BlogPostDto>(newPost);
 
         return result;
     }
