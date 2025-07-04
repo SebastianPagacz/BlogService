@@ -7,5 +7,5 @@ public interface IPostRepository
     Task<BlogPostEntity> AddAsync(BlogPostEntity post);
     Task<List<BlogPostEntity>> GetAllAsync();
     Task<BlogPostEntity> GetByIdAsync(int id);
-    Task<BlogPostEntity> UpdateAsync(int id, BlogPostEntity post);
+    Task UpdateAsync(BlogPostEntity post);
 }

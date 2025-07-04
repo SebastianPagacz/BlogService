@@ -22,15 +22,8 @@ public class PostRepository(DataContext context) : IPostRepository
         return await context.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
     }
 
-    public async Task<BlogPostEntity> UpdateAsync(int id, BlogPostEntity post)
+    public async Task UpdateAsync(BlogPostEntity post)
     {
-        var exisitingPost = await context.BlogPosts.FirstOrDefaultAsync(bp => bp.Id == id);
-
-        exisitingPost.Title = post.Title;
-        exisitingPost.Content = post.Content;
-        exisitingPost.UpdatedAt = DateTime.Now;
-
         await context.SaveChangesAsync();
-        return exisitingPost;
     }
 }
