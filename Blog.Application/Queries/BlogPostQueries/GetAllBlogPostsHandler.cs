@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Blog.Domain.Dtos;
+using Blog.Domain.Exceptions.BlogPostExceptions;
 using Blog.Domain.Repositories.Repos;
 using MediatR;
 
@@ -11,6 +12,9 @@ public class GetAllBlogPostsHandler(IPostRepository repository, IMapper mapper) 
     {
         var posts = await repository.GetAllAsync();
         var availablePosts = posts.Where(p => !p.IsDeleted);
+
+        if (!availablePosts.Any())
+            throw new BlogPostNotFoundException("Content not found");
 
         return mapper.Map<List<BlogPostDto>>(availablePosts);
     }

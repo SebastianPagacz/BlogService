@@ -3,6 +3,7 @@ using Blog.Domain.Profiles;
 using Blog.Domain.Repositories;
 using Blog.Domain.Repositories.Repos;
 using Blog.Domain.Seeders;
+using BlogService.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -35,6 +36,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Exception handling middleware
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Seeding test data
 var scope = app.Services.CreateScope();

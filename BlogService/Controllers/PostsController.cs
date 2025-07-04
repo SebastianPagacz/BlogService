@@ -21,9 +21,16 @@ public class PostsController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAllAsync()
     {
         var result = await mediator.Send(new GetAllBlogPostsQuery());
+
+        return StatusCode(200, result);
+    }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByIdAsync(int id)
+    {
+        var result = await mediator.Send(new GetBlogPostByIdQuery { Id = id });
 
         return StatusCode(200, result);
     }

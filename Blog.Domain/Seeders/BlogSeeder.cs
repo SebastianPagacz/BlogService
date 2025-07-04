@@ -14,6 +14,7 @@ public class BlogSeeder(DataContext context) : IBlogSeeder
                 new BlogPostEntity { Title = "Test1", Content = "Testowy content pierwszego posta. Testowa wiadomosc.", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
                 new BlogPostEntity { Title = "Test2", Content = "Testowa tresc drugiego posta, tworze wiec jestem", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
                 new BlogPostEntity { Title = "Test3", Content = "Tak wyglada testowy post calkiem spoko nie ma ze nie", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                new BlogPostEntity { Title = "Test4", Content = "Lorem ipsum", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now, IsDeleted = true },
             };
 
             context.BlogPosts.AddRange(postsList);
