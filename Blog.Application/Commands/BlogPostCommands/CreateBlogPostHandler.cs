@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Blog.Application.Commands.ProductCommands;
 using Blog.Domain.Dtos;
+using Blog.Domain.Exceptions.BlogPostExceptions;
 using Blog.Domain.Models;
 using Blog.Domain.Repositories.Repos;
 using MediatR;
@@ -11,6 +12,11 @@ public class CreateBlogPostHandler(IPostRepository repository, IMapper mapper) :
 {
     public async Task<BlogPostDto> Handle(CreateBlogPostCommand request, CancellationToken cancellationToken)
     {
+        var existingPost = await repository.GetByTitleAsync(request.Titile);
+
+        if (existingPost != null)
+            throw new ItemAlreadyExistsException("Post already exists");
+
         var newPost = new BlogPostEntity
         {
             Title = request.Titile,

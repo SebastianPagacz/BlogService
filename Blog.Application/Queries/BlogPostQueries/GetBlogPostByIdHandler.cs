@@ -13,7 +13,7 @@ public class GetBlogPostByIdHandler(IPostRepository repository, IMapper mapper) 
         var result = await repository.GetByIdAsync(request.Id);
 
         if (result is null || result.IsDeleted)
-            throw new BlogPostNotFoundException("Content was not found");
+            throw new ItemNotFoundException("Content was not found");
 
         var resultDto = mapper.Map<BlogPostDto>(result);
         return resultDto;

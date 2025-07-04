@@ -13,7 +13,7 @@ public class PatchBlogPostHandler(IPostRepository repository, IMapper mapper) : 
         var existingPost = await repository.GetByIdAsync(request.Id);
 
         if (existingPost is null)
-            throw new BlogPostNotFoundException("Content was not found");
+            throw new ItemNotFoundException("Content was not found");
 
         if(!String.IsNullOrEmpty(request.Title))
         {

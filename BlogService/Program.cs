@@ -12,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("TestDb"));
 builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
 builder.Services.AddAutoMapper(typeof(AssemblyReference));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Blog.Application.AssemblyReference).Assembly));
 

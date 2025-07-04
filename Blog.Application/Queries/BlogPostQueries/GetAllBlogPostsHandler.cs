@@ -14,7 +14,7 @@ public class GetAllBlogPostsHandler(IPostRepository repository, IMapper mapper) 
         var availablePosts = posts.Where(p => !p.IsDeleted);
 
         if (!availablePosts.Any())
-            throw new BlogPostNotFoundException("Content not found");
+            throw new ItemNotFoundException("Content not found");
 
         return mapper.Map<List<BlogPostDto>>(availablePosts);
     }

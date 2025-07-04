@@ -26,4 +26,8 @@ public class PostRepository(DataContext context) : IPostRepository
     {
         await context.SaveChangesAsync();
     }
+    public async Task<BlogPostEntity> GetByTitleAsync(string title)
+    {
+        return await context.BlogPosts.FirstOrDefaultAsync(bp => bp.Title == title);
+    }
 }
