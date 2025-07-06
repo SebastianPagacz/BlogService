@@ -49,8 +49,8 @@ public class PostsController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(new DeleteBlogPostCommand { Id = id });
 
         if (result == true)
-            return StatusCode(200, new { message = "Succesfully deleted"});
+            return StatusCode(200, new { message = "Post deleted"});
 
-        return StatusCode(404, new { message = "Content was not found" });
+        return StatusCode(404, new { message = "Post was not found" });
     }
 }

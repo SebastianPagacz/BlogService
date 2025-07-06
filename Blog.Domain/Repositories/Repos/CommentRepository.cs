@@ -12,9 +12,9 @@ public class CommentRepository(DataContext context) : ICommentRepository
         return comment;
     }
 
-    public async Task<List<CommentEntity>> GetAllAsync()
+    public async Task<List<CommentEntity>> GetAllAsync(int postId)
     {
-        return await context.Comments.ToListAsync();
+        return await context.Comments.Where(c => c.PostId == postId).ToListAsync();
     }
 
     public async Task<CommentEntity> GetByIdAsync(int id)
@@ -22,7 +22,7 @@ public class CommentRepository(DataContext context) : ICommentRepository
         return await context.Comments.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task UpdateASync(CommentEntity comment)
+    public async Task UpdateAsync(CommentEntity comment)
     {
         await context.SaveChangesAsync();
     }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Blog.Application.Commands.ProductCommands;
 using Blog.Domain.Dtos;
-using Blog.Domain.Exceptions.BlogPostExceptions;
+using Blog.Domain.Exceptions;
 using Blog.Domain.Models;
 using Blog.Domain.Repositories.Repos;
 using MediatR;

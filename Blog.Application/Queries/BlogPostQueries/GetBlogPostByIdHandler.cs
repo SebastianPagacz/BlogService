@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Blog.Domain.Dtos;
-using Blog.Domain.Exceptions.BlogPostExceptions;
+using Blog.Domain.Exceptions;
 using Blog.Domain.Repositories.Repos;
 using MediatR;
 

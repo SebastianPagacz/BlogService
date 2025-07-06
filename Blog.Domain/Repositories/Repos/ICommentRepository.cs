@@ -5,7 +5,7 @@ namespace Blog.Domain.Repositories.Repos;
 public interface ICommentRepository
 {
     Task<CommentEntity> AddAsync(CommentEntity comment);
-    Task<List<CommentEntity>> GetAllAsync();
+    Task<List<CommentEntity>> GetAllAsync(int postId);
     Task<CommentEntity> GetByIdAsync(int id);
-    Task UpdateASync(CommentEntity comment);
+    Task UpdateAsync(CommentEntity comment);
 }

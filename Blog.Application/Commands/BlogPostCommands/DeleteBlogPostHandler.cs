@@ -1,4 +1,4 @@
-﻿using Blog.Domain.Exceptions.BlogPostExceptions;
+﻿using Blog.Domain.Exceptions;
 using Blog.Domain.Repositories.Repos;
 using MediatR;
 

@@ -1,4 +1,4 @@
-﻿using Blog.Domain.Exceptions.BlogPostExceptions;
+﻿using Blog.Domain.Exceptions;
 
 namespace BlogService.Middleware;
 

@@ -1,4 +1,4 @@
-﻿namespace Blog.Domain.Exceptions.BlogPostExceptions;
+﻿namespace Blog.Domain.Exceptions;
 
 public class ItemAlreadyExistsException : Exception
 {
