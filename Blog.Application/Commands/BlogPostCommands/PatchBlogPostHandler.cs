@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
+using Blog.Application.Services;
 using Blog.Domain.Dtos;
 using Blog.Domain.Exceptions;
+using Blog.Domain.Models;
 using Blog.Domain.Repositories.Repos;
 using MediatR;
 
 namespace Blog.Application.Commands.BlogPostCommands;
 
-public class PatchBlogPostHandler(IPostRepository repository, IMapper mapper) : IRequestHandler<PatchBlogPostCommand, BlogPostDto>
+public class PatchBlogPostHandler(IPostRepository repository, IMapper mapper, ICacheService cache) : IRequestHandler<PatchBlogPostCommand, BlogPostDto>
 {
     public async Task<BlogPostDto> Handle(PatchBlogPostCommand request, CancellationToken cancellationToken)
     {
@@ -22,6 +24,10 @@ public class PatchBlogPostHandler(IPostRepository repository, IMapper mapper) : 
             existingPost.Content = request.Content;
 
         existingPost.UpdatedAt = DateTime.UtcNow;
+
+        //caching
+        var cacheKey = $"post:{existingPost.Id}";
+        await cache.SetAsync<BlogPostEntity>(cacheKey, existingPost, TimeSpan.FromMinutes(5));
 
         await repository.UpdateAsync(existingPost);
         return mapper.Map<BlogPostDto>(existingPost);
