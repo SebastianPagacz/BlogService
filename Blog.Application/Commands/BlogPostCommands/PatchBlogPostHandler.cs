@@ -25,11 +25,11 @@ public class PatchBlogPostHandler(IPostRepository repository, IMapper mapper, IC
 
         existingPost.UpdatedAt = DateTime.UtcNow;
 
+        await repository.UpdateAsync(existingPost);
         //caching
         var cacheKey = $"post:{existingPost.Id}";
-        await cache.SetAsync<BlogPostEntity>(cacheKey, existingPost, TimeSpan.FromMinutes(5));
+        await cache.SetAsync(cacheKey, existingPost, TimeSpan.FromMinutes(5));
 
-        await repository.UpdateAsync(existingPost);
         return mapper.Map<BlogPostDto>(existingPost);
     }
 }

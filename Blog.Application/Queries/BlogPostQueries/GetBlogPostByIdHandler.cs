@@ -16,7 +16,7 @@ public class GetBlogPostByIdHandler(IPostRepository repository, IMapper mapper, 
         var cacheKey = $"post:{request.Id}";
         var cachedPost = await cache.GetAsync<BlogPostEntity>(cacheKey);
         
-        if (cachedPost != null) 
+        if (cachedPost != null && !cachedPost.IsDeleted) 
         {
             return mapper.Map<BlogPostDto>(cachedPost);
         }

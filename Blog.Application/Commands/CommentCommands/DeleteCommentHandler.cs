@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using Blog.Application.Services;
 using Blog.Domain.Exceptions;
 using Blog.Domain.Repositories.Repos;
 using MediatR;
 
 namespace Blog.Application.Commands.CommentCommands;
 
-public class DeleteCommentHandler(ICommentRepository repository) : IRequestHandler<DeleteCommentCommand, bool>
+public class DeleteCommentHandler(ICommentRepository repository, ICacheService cache) : IRequestHandler<DeleteCommentCommand, bool>
 {
     public async Task<bool> Handle(DeleteCommentCommand request, CancellationToken cancellationToken)
     {
@@ -16,6 +17,10 @@ public class DeleteCommentHandler(ICommentRepository repository) : IRequestHandl
 
         exisitingComment.IsDeleted = true;
         await repository.UpdateAsync(exisitingComment);
+
+        // caching
+        var cachceKey = $"comment:{request.Id}";
+        await cache.RemoveAsync(cachceKey);
 
         return true;
     }
