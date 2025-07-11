@@ -6,6 +6,7 @@ using Blog.Domain.Seeders;
 using BlogService.Middleware;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
+using Microsoft.EntityFrameworkCore.Design;
 
 internal class Program
 {
@@ -13,8 +14,12 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var dbConnectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING") ?? builder.Configuration.GetConnectionString("DefaultConnection");
+
         // Add services to the container.
-        builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("TestDb"));
+        //builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("TestDb"));
+        builder.Services.AddDbContext<DataContext>(options =>
+        options.UseSqlServer(dbConnectionString), ServiceLifetime.Transient);
         builder.Services.AddScoped<IPostRepository, PostRepository>();
         builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 

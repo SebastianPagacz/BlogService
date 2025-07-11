@@ -6,10 +6,22 @@ services:
       dockerfile: BlogService/Dockerfile
     depends_on:
      - cache
+     - database
+    environment:
+     - CONNECTION_STRING=Server=database;Database=BlogDb; User Id =sa;Password=s7rong!Password;TrustServerCertificate=True;
   
   cache:
     image: redis:latest
     container_name: redis
     restart: unless-stopped
     ports:
-     - "6397:6397"
+     - "6379:6379"
+
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    ports:
+     - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "s7rong!Password"
