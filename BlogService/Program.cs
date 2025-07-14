@@ -6,7 +6,6 @@ using Blog.Domain.Seeders;
 using BlogService.Middleware;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
-using Microsoft.EntityFrameworkCore.Design;
 
 internal class Program
 {
