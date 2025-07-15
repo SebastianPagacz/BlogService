@@ -2,6 +2,6 @@
 
 namespace User.Domain.Models;
 
-public class RoleEntity : IdentityRole<string>
+public class RoleEntity : IdentityRole<int>
 {
 }

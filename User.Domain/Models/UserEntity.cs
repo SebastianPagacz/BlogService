@@ -2,6 +2,6 @@
 
 namespace User.Domain.Models;
 
-public class UserEntity : IdentityUser<string>
+public class UserEntity : IdentityUser<int>
 {
 }

@@ -9,6 +9,7 @@ services:
      - database
     environment:
      - CONNECTION_STRING=Server=database;Database=BlogDb; User Id=sa;Password=s7rong!Password;TrustServerCertificate=True;
+     - USER_CONNECTION_STRING=Server=database;Database=UserDb; User Id=sa;Password=s7rong!Password;TrustServerCertificate=True;
   
   userservice:
     image: ${DOCKER_REGISTRY-}userservice
